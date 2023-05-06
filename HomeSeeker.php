@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
--->
+
 <html>
-    
+     <?php
+        
+        $connection = mysqli_connect("localhost", "root", "root", "home_properties");
+        $error = mysqli_connect_error();
+        if ($error != null) {
+            echo '<p> Could not connect to the database. </p>';
+        }
+        
+        else{
+        //    echo "Connect!!!!!!!!!!";
+        }
+  
+        ?>
    <head>
     <title>HomeSeekers</title>
     <meta charset="UTF-8">
@@ -108,6 +117,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                 </select>
             </div>
             <table>
+                <?php
+                $sql = " SELECT * FROM property ";
+                $sql2 = " SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id 
+                      FROM propertycategory 
+                      JOIN property 
+                      ON propertycategory.id = property.property_category_id " ;
+               // $sql_categries = " SELECT * FROM propertycategory WHERE id = property_category_id " ;
+                $result = mysqli_query($connection, $sql2);
+               // $mysqli->close();
+                ?>
                 <caption>Home for rent</caption>
 
                 <thead>
@@ -120,17 +139,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                 </thead>
 
                 <tbody>
+                     <?php
+                // LOOP TILL END OF DATA
+                while($rows= mysqli_fetch_assoc($result))
+                {
+            ?>
                     <tr>
-                        <td><a class="property-name" href="">Sweet home</a></td>
-                        <td>Apartment</td>
-                        <td>2500/month</td>
-                        <td>4</td>
-                        <td>Riyadh,Al-Naries District</td>
+                        <td><a class="property-name" href="">
+                            <?php echo $rows['name'];?></a></td>
+                        <td><?php echo $rows['category'];?></td>
+                        <td><?php echo $rows['rent_cost'];?></td>
+                        <td><?php echo $rows['rooms'];?></td>
+                        <td><?php echo $rows['location'];?></td>
 
                         <td>
                             <a class="Apply" href="">Apply</a>
                         </td>
 
+                        <!--
                     </tr>
 
                     <tr>
@@ -145,13 +171,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
                         </td>
                     </tr>
 
+                        -->
 
 
 
                 </tbody>
 
 
-
+              <?php
+                }
+            ?>
             </table>
 
 
@@ -185,5 +214,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     
     
 </html>
+
 
 
