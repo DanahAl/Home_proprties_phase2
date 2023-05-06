@@ -4,7 +4,7 @@
  */
 
 function home() {
-window.location.replace("../proj/index.html");    
+window.location.replace("index.html");    
     
 }
 
