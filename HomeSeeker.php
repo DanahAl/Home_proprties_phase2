@@ -70,6 +70,11 @@
                 <th>Status</th>
                 </thead>
 
+                <!--DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';-->
+                
+                
+                
+                
                 <tbody>
                     <tr>
                         <td><a class="property-name" href="property_details.html">Olaya Plaza </a></td>
@@ -78,10 +83,7 @@
                         </td>
                         <td>30,000/year</td>
                         <td>Under Consideration</td>
-                        <td>
-                            <a class="Withdraw" href="">Withdraw</a>
-
-                        </td>
+                        
 
                     </tr>
 
@@ -153,7 +155,14 @@
                         <td><?php echo $rows['location'];?></td>
 
                         <td>
-                            <a class="Apply" href="">Apply</a>
+                            <a class="Apply" href="">Apply
+                            
+                            <?php
+                            
+                            $InsertQuery = " INSERT INTO rentalapplication (id, property_id, home_seeker_id, application_status_id)
+                                           VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006'); "
+                            ?>
+                            </a>
                         </td>
 
                         <!--
