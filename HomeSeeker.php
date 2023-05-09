@@ -24,6 +24,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
              <script src="logOut.js"></script> 
 
+             
+             
+             
+ <script type="text/javascript">
+function thisfunction(){
+    var x = new XMLHttpRequest();
+    x.open("GET","ApplyRent.inc.php",true);
+    x.send();
+    return false;
+}
+</script>
 </head>
 
 <body>
@@ -65,7 +76,7 @@
 
                 <thead>
                 <th>Property Name</th>
-                <th>Catgory</th>
+                <th>Category</th>
                 <th>Rent</th>
                 <th>Status</th>
                 </thead>
@@ -74,30 +85,58 @@
                 
                 
                 
+                <?php
+                
+                
+                 $rentalAppquery = "  SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id , applicationstatus.status
+                      FROM propertycategory 
+                      JOIN property 
+                      ON propertycategory.id = property.property_category_id
+                      JOIN applicationstatus
+                      ON applicationstatus.id = property.property_category_id ";
+                
+                
+                
+                 
+               // session_start();
+               $query1 = "SELECT * FROM rentalapplication ";
+            $result0 = mysqli_query($connection, $query1);
+
+
+              
+               // $_SESSION['id'] = $row['id'];
+           //  $id = $_SESSION['id'];
+             
+                //    $query2= "SELECT * FROM rentalapplication WHERE id=  ";
+
+            // $query2.$id;
+
+            $result1 = mysqli_query($connection, $rentalAppquery);
+               
+            if (mysqli_num_rows($result1) > 0) {
+              while ($rows = mysqli_fetch_assoc($result1)) {
+            ?>
+                
+                 
                 
                 <tbody>
                     <tr>
-                        <td><a class="property-name" href="property_details.html">Olaya Plaza </a></td>
+                        <td><a class="property-name" href="property_details.html"> <?php echo $rows['name'];?></a></td>
                         <td>
-                            Villa
+                            <?php echo $rows['category'];?>
                         </td>
-                        <td>30,000/year</td>
-                        <td>Under Consideration</td>
+                        <td><?php echo $rows['rent_cost'];?></td>
+                        <td><?php echo $rows['status'];?></td>
                         
 
                     </tr>
 
-                    <tr>
-                        <td><a class="property-name" href="">AL Nakheel home </a></td>
-                        <td>
-                            Villa
-                        </td>
-                        <td>4000/month</td>
-                        <td>Under Consideration</td>
-                        <td>
-                        </td>
-
-                    </tr>
+                   
+                   <?php 
+              }
+            }
+                   
+                   ?>
 
                 </tbody>
 
@@ -126,7 +165,7 @@
                       JOIN property 
                       ON propertycategory.id = property.property_category_id " ;
                // $sql_categries = " SELECT * FROM propertycategory WHERE id = property_category_id " ;
-                $result = mysqli_query($connection, $sql2);
+                $result2 = mysqli_query($connection, $sql2);
                // $mysqli->close();
                 ?>
                 <caption>Home for rent</caption>
@@ -143,7 +182,7 @@
                 <tbody>
                      <?php
                 // LOOP TILL END OF DATA
-                while($rows= mysqli_fetch_assoc($result))
+                while($rows= mysqli_fetch_assoc($result2))
                 {
             ?>
                     <tr>
@@ -155,13 +194,9 @@
                         <td><?php echo $rows['location'];?></td>
 
                         <td>
-                            <a class="Apply" href="">Apply
+                          <a class="Apply" href="#" onclick="thisfunction()">Apply
                             
-                            <?php
                             
-                            $InsertQuery = " INSERT INTO rentalapplication (id, property_id, home_seeker_id, application_status_id)
-                                           VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006'); "
-                            ?>
                             </a>
                         </td>
 
