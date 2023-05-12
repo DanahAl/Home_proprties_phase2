@@ -14,6 +14,8 @@
         }
   
         ?>
+    
+   
    <head>
     <title>HomeSeekers</title>
     <meta charset="UTF-8">
@@ -26,7 +28,8 @@
 
              
              
-             
+    
+    <!--
  <script type="text/javascript">
 function thisfunction(){
     var x = new XMLHttpRequest();
@@ -35,6 +38,10 @@ function thisfunction(){
     return false;
 }
 </script>
+    
+    -->
+    
+    
 </head>
 
 <body>
@@ -88,19 +95,33 @@ function thisfunction(){
                 <?php
                 
                 
-                 $rentalAppquery = "  SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id , applicationstatus.status
+                 $rentalAppquery = "SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id , applicationstatus.status
                       FROM propertycategory 
                       JOIN property 
                       ON propertycategory.id = property.property_category_id
                       JOIN applicationstatus
-                      ON applicationstatus.id = property.property_category_id ";
+                      ON applicationstatus.id = property.property_category_id";
+                 
+                 
+                 $rentalQuery=" SELECT rentalapplication.id , property.id , property.rent_cost , property.name , propertycategory.id , propertycategory.category , applicationstatus.id , applicationstatus.status
+FROM rentalapplication
+JOIN property
+ON rentalapplication.id = property.id
+JOIN propertycategory
+ON propertycategory.id = property.id
+JOIN applicationstatus
+ON applicationstatus.id = rentalapplication.application_status_id ";
+                         
+                     
+                        
+                       
                 
                 
                 
                  
                // session_start();
-               $query1 = "SELECT * FROM rentalapplication ";
-            $result0 = mysqli_query($connection, $query1);
+           //    $query1 = "SELECT * FROM rentalapplication ";
+         //   $result0 = mysqli_query($connection, $rentalQuery);
 
 
               
@@ -111,12 +132,14 @@ function thisfunction(){
 
             // $query2.$id;
 
-            $result1 = mysqli_query($connection, $rentalAppquery);
-               
-            if (mysqli_num_rows($result1) > 0) {
-              while ($rows = mysqli_fetch_assoc($result1)) {
-            ?>
+            $result1 = mysqli_query($connection, $rentalQuery);
+               ?>
                 
+                <?php
+           // if (mysqli_num_rows($result1) > 0) {
+              while ($rows = mysqli_fetch_assoc($result1)) {
+            
+                ?>
                  
                 
                 <tbody>
@@ -134,7 +157,7 @@ function thisfunction(){
                    
                    <?php 
               }
-            }
+          //  }
                    
                    ?>
 
@@ -194,10 +217,21 @@ function thisfunction(){
                         <td><?php echo $rows['location'];?></td>
 
                         <td>
-                          <a class="Apply" href="#" onclick="thisfunction()">Apply
+                        <!--  <a class="Apply" href="#" onclick="thisfunction()">Apply </a> -->
+                        
+                        <!--
+                        <form action="ApplyRent.inc.php" method="get">
                             
-                            
-                            </a>
+                            <input type="submit" name="ApplyButtonName" id="ApplyButtonID" value="Apply">
+                        </form>
+                        
+                        
+                        -->
+                        
+                        
+                        <a href="ApplyRent.inc.php?propertyID=<?php echo $rows['id'];?>">Test $GET</a>
+
+
                         </td>
 
                         <!--
@@ -224,6 +258,8 @@ function thisfunction(){
 
               <?php
                 }
+                        mysqli_close($connection);
+
             ?>
             </table>
 

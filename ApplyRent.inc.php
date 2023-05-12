@@ -22,16 +22,40 @@
         
         else{
            echo "Connect!!!!!!!!!!";
+           
+           
+         if ($_SERVER['REQUEST_METHOD'] == "GET") {
+      //  $location = $_POST['location'];
+        
+                                     
+              
+                          $pID= $_GET['propertyID'];
+           //  $pID = $_GET['property_id'];
+            //  $HSid = $_GET['home_seeker_id'];
+              $appStatus = 2;
+        
+        
+        $Insertquery = "INSERT INTO rentalapplication (id, property_id, home_seeker_id, application_status_id)
+                   VALUES (8, '$pID', 2, '$appStatus') ";
+                  $result = mysqli_query($connection, $Insertquery);
+
+         
+               header("Location: HomeSeeker.php");
+
+    }
         }
   
+  
         
+        
+        /*
 $id = $_GET['id'];
 $pID = $_GET['property_id'];
 $HSid = $_GET['home_seeker_id'];
 $appStatus = "Under consideration";
 
 
-$Insertquery = " INSERT INTO rentalapplication (id, property_id, home_seeker_id, application_status_id)
+$Insertquery = "INSERT INTO rentalapplication (id, property_id, home_seeker_id, application_status_id)
                    VALUES ('$id', '$pID', '$HSid', '$appStatus') ";
 $result = mysqli_query($connection, $Insertquery);
 if ($result) {
@@ -42,4 +66,4 @@ if ($result) {
     echo "Error deleting record";
 }
 
-
+*/
