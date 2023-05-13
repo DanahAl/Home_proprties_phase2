@@ -14,7 +14,7 @@
 
 
         
-        $connection = mysqli_connect("localhost", "root", "root", "home_properties");
+        $connection = mysqli_connect("localhost", "root", "root", "properties_home");
         $error = mysqli_connect_error();
         if ($error != null) {
             echo '<p> Could not connect to the database. </p>';
@@ -36,7 +36,7 @@
         
         
         $Insertquery = "INSERT INTO rentalapplication (id, property_id, home_seeker_id, application_status_id)
-                   VALUES (8, '$pID', 2, '$appStatus') ";
+                   VALUES (NULL, '$pID', 2, '$appStatus') ";
                   $result = mysqli_query($connection, $Insertquery);
 
          

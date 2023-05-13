@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 18, 2023 at 07:56 PM
+-- Generation Time: May 13, 2023 at 01:14 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `home properties`
+-- Database: `properties_home`
 --
 
 -- --------------------------------------------------------
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `applicationstatus` (
-  `id` int(11) NOT NULL,
+  `id` int(1) NOT NULL,
   `status` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -48,7 +48,7 @@ INSERT INTO `applicationstatus` (`id`, `status`) VALUES
 --
 
 CREATE TABLE `homeowner` (
-  `id` int(11) NOT NULL,
+  `id` int(1) NOT NULL,
   `name` varchar(30) NOT NULL,
   `phone_number` int(11) NOT NULL,
   `email_address` varchar(70) NOT NULL,
@@ -71,7 +71,7 @@ INSERT INTO `homeowner` (`id`, `name`, `phone_number`, `email_address`, `passwor
 --
 
 CREATE TABLE `homeseeker` (
-  `id` int(11) NOT NULL,
+  `id` int(1) NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(30) NOT NULL,
   `age` int(11) NOT NULL,
@@ -90,7 +90,9 @@ CREATE TABLE `homeseeker` (
 INSERT INTO `homeseeker` (`id`, `first_name`, `last_name`, `age`, `family_members`, `income`, `job`, `phone_number`, `email_address`, `password`) VALUES
 (1, 'Ahamd', 'khalid', 25, 4, 1000, 'Office manager', 543765439, 'ahmad@gmail.com', '$2y$10$wvUv8ZqPNEtHLCxgBw.voOlEL051PN.XwbtEN0DxHfrbQ./INMC5e'),
 (2, 'Lama', 'Muhammad', 32, 4, 8500, 'Writer', 543876543, 'lama@gmail.com', '$2y$10$3ZSWzImFVUB3ZkuGd/UXSuA01q1N.VcEuAQbKaEQAwIXl9gX1uwxa'),
-(3, 'Fatima', 'hamad', 43, 5, 13000, 'Project manager', 564876543, 'Fatima@gmail.com', '$2y$10$.TwxhjXDUU7SBTTDmaBMNeQsUqybZBtyj5yXj6GEbjW0Tzvc4o3Pa');
+(3, 'Fatima', 'hamad', 43, 5, 13000, 'Project manager', 564876543, 'Fatima@gmail.com', '$2y$10$.TwxhjXDUU7SBTTDmaBMNeQsUqybZBtyj5yXj6GEbjW0Tzvc4o3Pa'),
+(4, 'sa', 'rer', 34, 34, 34, 'fg', 4543, 'dfsd', 'dsf'),
+(5, 'sfgha', 'rer', 34, 34, 34, 'fg', 4543, 'dfsd', 'dsf');
 
 -- --------------------------------------------------------
 
@@ -99,7 +101,7 @@ INSERT INTO `homeseeker` (`id`, `first_name`, `last_name`, `age`, `family_member
 --
 
 CREATE TABLE `property` (
-  `id` int(11) NOT NULL,
+  `id` int(1) NOT NULL,
   `homeowner_id` int(11) NOT NULL,
   `property_category_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
@@ -126,7 +128,7 @@ INSERT INTO `property` (`id`, `homeowner_id`, `property_category_id`, `name`, `r
 --
 
 CREATE TABLE `propertycategory` (
-  `id` int(11) NOT NULL,
+  `id` int(1) NOT NULL,
   `category` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -146,7 +148,7 @@ INSERT INTO `propertycategory` (`id`, `category`) VALUES
 --
 
 CREATE TABLE `propertyimage` (
-  `id` int(11) NOT NULL,
+  `id` int(1) NOT NULL,
   `property_id` int(11) NOT NULL,
   `path` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -158,7 +160,7 @@ CREATE TABLE `propertyimage` (
 --
 
 CREATE TABLE `rentalapplication` (
-  `id` int(11) NOT NULL,
+  `id` int(1) NOT NULL,
   `property_id` int(11) NOT NULL,
   `home_seeker_id` int(11) NOT NULL,
   `application_status_id` int(11) NOT NULL
@@ -226,29 +228,50 @@ ALTER TABLE `rentalapplication`
   ADD KEY `application_status_id` (`application_status_id`);
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Constraints for table `property`
+-- AUTO_INCREMENT for table `applicationstatus`
+--
+ALTER TABLE `applicationstatus`
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `homeowner`
+--
+ALTER TABLE `homeowner`
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `homeseeker`
+--
+ALTER TABLE `homeseeker`
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  ADD CONSTRAINT `property_ibfk_1` FOREIGN KEY (`homeowner_id`) REFERENCES `homeowner` (`id`),
-  ADD CONSTRAINT `property_ibfk_2` FOREIGN KEY (`property_category_id`) REFERENCES `propertycategory` (`id`);
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for table `propertyimage`
+-- AUTO_INCREMENT for table `propertycategory`
+--
+ALTER TABLE `propertycategory`
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `propertyimage`
 --
 ALTER TABLE `propertyimage`
-  ADD CONSTRAINT `propertyimage_ibfk_1` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`);
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for table `rentalapplication`
+-- AUTO_INCREMENT for table `rentalapplication`
 --
 ALTER TABLE `rentalapplication`
-  ADD CONSTRAINT `rentalapplication_ibfk_1` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`),
-  ADD CONSTRAINT `rentalapplication_ibfk_2` FOREIGN KEY (`home_seeker_id`) REFERENCES `homeseeker` (`id`),
-  ADD CONSTRAINT `rentalapplication_ibfk_3` FOREIGN KEY (`application_status_id`) REFERENCES `applicationstatus` (`id`);
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

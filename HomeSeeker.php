@@ -3,7 +3,7 @@
 <html>
      <?php
         
-        $connection = mysqli_connect("localhost", "root", "root", "home_properties");
+        $connection = mysqli_connect("localhost", "root", "root", "properties_home");
         $error = mysqli_connect_error();
         if ($error != null) {
             echo '<p> Could not connect to the database. </p>';
@@ -92,17 +92,12 @@ function thisfunction(){
                 
                 
                 
+             
+                
+                
+                
                 <?php
                 
-                
-                 $rentalAppquery = "SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id , applicationstatus.status
-                      FROM propertycategory 
-                      JOIN property 
-                      ON propertycategory.id = property.property_category_id
-                      JOIN applicationstatus
-                      ON applicationstatus.id = property.property_category_id";
-                 
-                 
                  $rentalQuery=" SELECT rentalapplication.id , property.id , property.rent_cost , property.name , propertycategory.id , propertycategory.category , applicationstatus.id , applicationstatus.status
 FROM rentalapplication
 JOIN property
@@ -111,38 +106,25 @@ JOIN propertycategory
 ON propertycategory.id = property.id
 JOIN applicationstatus
 ON applicationstatus.id = rentalapplication.application_status_id ";
-                         
-                     
-                        
-                       
+   
                 
-                
-                
-                 
-               // session_start();
-           //    $query1 = "SELECT * FROM rentalapplication ";
-         //   $result0 = mysqli_query($connection, $rentalQuery);
-
-
-              
-               // $_SESSION['id'] = $row['id'];
-           //  $id = $_SESSION['id'];
-             
-                //    $query2= "SELECT * FROM rentalapplication WHERE id=  ";
-
-            // $query2.$id;
+           
 
             $result1 = mysqli_query($connection, $rentalQuery);
-               ?>
                 
-                <?php
+                
            // if (mysqli_num_rows($result1) > 0) {
-              while ($rows = mysqli_fetch_assoc($result1)) {
             
                 ?>
                  
                 
                 <tbody>
+                    
+                    <?php 
+                    
+                    
+                  while ($rows = mysqli_fetch_assoc($result1)) {
+?>
                     <tr>
                         <td><a class="property-name" href="property_details.html"> <?php echo $rows['name'];?></a></td>
                         <td>
@@ -155,13 +137,12 @@ ON applicationstatus.id = rentalapplication.application_status_id ";
                     </tr>
 
                    
-                   <?php 
+             
+                </tbody>
+      <?php 
               }
-          //  }
                    
                    ?>
-
-                </tbody>
 
 
 
@@ -174,23 +155,57 @@ ON applicationstatus.id = rentalapplication.application_status_id ";
 
                 <label>Search by category:</label>
 
+                
+                <form method="POST">
+
                 <select name="category">
-                    <option value="Apartment">Apartment</option>
-                    <option value="Villa">Villa</option>
-                    <option value="Home">Home</option>
+                  <?php
+                $sql = "SELECT * FROM propertycategory";
+                $result = mysqli_query($connection, $sql);
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo ' <option value="' . $row['id'] . '">' . $row['category'] . '</option>';
+                }
+                ?>
                 </select>
+                 <button type = "submit">Search</button>
+
+                </form>
             </div>
+            
+       
             <table>
-                <?php
-                $sql = " SELECT * FROM property ";
-                $sql2 = " SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id 
+                
+                     <?php
+            
+            $resultFin;
+             if($_SERVER['REQUEST_METHOD'] == "POST") {
+                 
+                 $Property_CAT = $_POST['category'];
+                 $sqlQueryCat = " SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id 
+                      FROM propertycategory 
+                      JOIN property 
+                      ON propertycategory.id = property.property_category_id
+                      WHERE propertycategory.id = ".$Property_CAT;
+                 $resultFin =  mysqli_query($connection, $sqlQueryCat);
+                 
+             }
+             
+             else {
+                 
+                 $sql2 = " SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id 
                       FROM propertycategory 
                       JOIN property 
                       ON propertycategory.id = property.property_category_id " ;
-               // $sql_categries = " SELECT * FROM propertycategory WHERE id = property_category_id " ;
-                $result2 = mysqli_query($connection, $sql2);
-               // $mysqli->close();
-                ?>
+                            $resultFin= mysqli_query($connection, $sql2);
+                 
+             }
+             
+
+   
+          
+            
+            ?>
+              
                 <caption>Home for rent</caption>
 
                 <thead>
@@ -205,7 +220,7 @@ ON applicationstatus.id = rentalapplication.application_status_id ";
                 <tbody>
                      <?php
                 // LOOP TILL END OF DATA
-                while($rows= mysqli_fetch_assoc($result2))
+                while($rows= mysqli_fetch_assoc($resultFin))
                 {
             ?>
                     <tr>
@@ -229,27 +244,12 @@ ON applicationstatus.id = rentalapplication.application_status_id ";
                         -->
                         
                         
-                        <a href="ApplyRent.inc.php?propertyID=<?php echo $rows['id'];?>">Test $GET</a>
+                        <a href="ApplyRent.inc.php?propertyID=<?php echo $rows['id'];?>">Apply</a>
 
 
                         </td>
 
-                        <!--
-                    </tr>
-
-                    <tr>
-                        <td><a class="property-name" href="">Comfy Home</a></td>
-                        <td>Villa</td>
-                        <td>7000/month</td>
-                        <td>6</td>
-                        <td>Riyadh,Al-Aqeeq District</td>
-
-                        <td>
-                            <a class="Apply" href="">Apply</a>
-                        </td>
-                    </tr>
-
-                        -->
+                     
 
 
 
