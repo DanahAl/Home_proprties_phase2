@@ -30,7 +30,7 @@
 
 
 
-            <form name="form1" id="formID" action="property_details.php" method="POST" onsubmit="return login();">
+            <form name="form1" id="formID" action="#" method="POST" onsubmit="return login();">
                 <fieldset>
                     <legend><h3>Add new property</h3></legend>
 
@@ -40,9 +40,9 @@
                     <label>Category:</label><br />
 
                     <select name="category">
-                        <option value="Apartment">Apartment</option>
-                        <option value="Villa">Villa</option>
-                        <option value="Home">Home</option>
+                        <option value="2">Apartment</option>
+                        <option value="3">Villa</option>
+                        <option value="1">Home</option>
                     </select> <br />
 
                     <label for="numbe rooms">Number of rooms:</label><br>
@@ -81,6 +81,7 @@
             echo "Connect!!!!!!!!!!";
         }
             
+        /*
         $name ="";
         $category="";
         $room =0;
@@ -90,53 +91,71 @@
         $description="";
         $imgURL="";
         $CatID=0;
+          
+         */
         
     if($_SERVER['REQUEST_METHOD'] == "POST") {
+        
+        //if (isset($_POST['title']) && isset($_POST['ff']) && isset($_POST['dd']) && isset($_POST['dd'])){
+	//	$title = mysqli_real_escape_string($databaseCon, $_POST['title']);
+	//	$ff = mysqli_real_escape_string($databaseCon, $_POST['ff']);
+	//	$book_cover = "";
+           
+                
                  $name = $_POST["name"];
         
           //  if(isset($_POST["category"])){
                 
               $category = $_POST["category"];
-              $CatID = " SELECT id FROM propertycategory
-                      WHERE category = ".$category;
+              echo $category;
+         //  $CatID = "SELECT id FROM propertycategory WHERE category= $";
+                 
+	//$dd = mysqli_real_escape_string($connection,$CatID );
+
+   // echo $dd;
               
-              
+            
+           //   $res = mysqli_query($connection, $CatID);
+
+             // echo $res;
+           // echo $CatID;
+
              
                              
-          //  }        
+                  
         
-          //   if(isset($_POST["room"]))
                 $room = $_POST["room"];
         
-                if(isset($_POST["rent"]))
                 $rent_cost = $_POST["rent"];
         
-       //    if(isset($_POST["location"]))
                 $location = $_POST["location"];
         
-        //    if(isset($_POST["tenants"]))
                   $tenants = $_POST["tenants"];
             
             
-        //    if(isset($_POST["description"]))
                   $description = $_POST["description"];
             
-         //    if(isset($_POST["img"]))
                   $imgURL = $_POST["img"];
+                  
+                  
+                  
+             $InsertProperty = "INSERT INTO property (id,homeowner_id, property_category_id, name , rooms ,rent_cost , location , max_tenants,
+                 description)
+                   VALUES (NULL, 1, '$category', '$name' , '$room' ,'$rent_cost' , '$location' , '$tenants' , '$description')";
+            
+           echo $InsertProperty;
+              $result1 = mysqli_query($connection, $InsertProperty);
+
       
     }     
-             $InsertProperty = "INSERT INTO property (id, homeowner_id, property_category_id, name , rooms ,rent_cost , location , max_tenants,
-                 description)
-                   VALUES (NULL, '1', '$CatID', '$name' , '$room' ,'$rent_cost' , '$location' , '$tenants' , '$description') ";
-            
              // $InsertImg = "INSERT INTO propertyimage (id,property_id, path)
              //      VALUES (NULL,, '$imgURL') ";
               
-            $result1 = mysqli_query($connection, $InsertProperty);
           //  $result2 = mysqli_query($connection, $InsertImg);
 
             
-    
+            mysqli_close($connection);
+
             
             ?>
            
