@@ -29,8 +29,9 @@
         <main>
 
 
+            <!-- onsubmit="return login()";-->
 
-            <form name="form1" id="formID" action="#" method="POST" onsubmit="return login();">
+            <form name="form1" id="formID" action="#" method="POST">
                 <fieldset>
                     <legend><h3>Add new property</h3></legend>
 
@@ -59,9 +60,12 @@
 
                     <label for="description">Description:</label><br>
                     <textarea name="description" id="description" placeholder="Write description about the property"></textarea><br />
+                    
+                    <label for="ImageName"> Image name:</label><br>
+                    <input type="text" id="ImageName" name="ImageName" value="" accesskey="n"><br>
 
                     <label for="img">Upload img:</label><br />
-                    <input type="file" id="img" name="img"><br />
+                    <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png"><br />
 
                     <br />
                     <input class="add" type="submit" value="Add">
@@ -95,34 +99,10 @@
          */
         
     if($_SERVER['REQUEST_METHOD'] == "POST") {
-        
-        //if (isset($_POST['title']) && isset($_POST['ff']) && isset($_POST['dd']) && isset($_POST['dd'])){
-	//	$title = mysqli_real_escape_string($databaseCon, $_POST['title']);
-	//	$ff = mysqli_real_escape_string($databaseCon, $_POST['ff']);
-	//	$book_cover = "";
-           
-                
-                 $name = $_POST["name"];
-        
-          //  if(isset($_POST["category"])){
-                
+       
+              $name = $_POST["name"];       
               $category = $_POST["category"];
-              echo $category;
-         //  $CatID = "SELECT id FROM propertycategory WHERE category= $";
-                 
-	//$dd = mysqli_real_escape_string($connection,$CatID );
-
-   // echo $dd;
-              
-            
-           //   $res = mysqli_query($connection, $CatID);
-
-             // echo $res;
-           // echo $CatID;
-
-             
-                             
-                  
+           //   echo $category;
         
                 $room = $_POST["room"];
         
@@ -131,25 +111,67 @@
                 $location = $_POST["location"];
         
                   $tenants = $_POST["tenants"];
-            
-            
                   $description = $_POST["description"];
+                  
             
-                  $imgURL = $_POST["img"];
-                  
-                  
-                  
-             $InsertProperty = "INSERT INTO property (id,homeowner_id, property_category_id, name , rooms ,rent_cost , location , max_tenants,
+                  /*
+               $InsertProperty = "INSERT INTO property (id,homeowner_id, property_category_id, name , rooms ,rent_cost , location , max_tenants,
                  description)
                    VALUES (NULL, 1, '$category', '$name' , '$room' ,'$rent_cost' , '$location' , '$tenants' , '$description')";
             
            echo $InsertProperty;
               $result1 = mysqli_query($connection, $InsertProperty);
+              */
+              
+              //to insert image
+                  
+                  if(isset($_POST["submit"])){
+                      
+                      
+                $imgName = $_POST["ImageName"];
+               if($_FILES["image"]["error"]===4){
+                   
+                   echo 'Image error!!!!';
+               }
+               
+               else{
+                   
+                   $fileName = $_FILES["image"]["name"];
+                   $fileSize = $_FILES["image"]["size"];
+                    $tmpName = $_FILES["image"]["tmp_name"];
+                    
+                    $validImageExtension = ["jpg" , "jpeg" , "png"];
+                    $imageExtension = explode('.' ,$fileName );
+                    $imageExtension = strtolower(end($imageExtension));
+                   if(!in_array($imageExtension, $validImageExtension)){
+                     echo 'Invalid Image';
+
+                   }
+                         
+                         
+                           else if($fileSize>1000000){
+                           echo 'Image size is to large!'; }
+                           
+                           else{
+                               
+                               $newImageName = uniqid();
+                               $newImageName .='.' .$imageExtension;
+                               
+     move_uploaded_file($tmpName, 'img/');
+     $InsertImg = "INSERT INTO propertyimage (id,property_id, path)
+                   VALUES (NULL,2,'$newImageName') ";
+     mysqli_query($connection, $InsertImg);
+     echo 'added';
+                           }
+               }
+                  }
+
+               
+             
 
       
     }     
-             // $InsertImg = "INSERT INTO propertyimage (id,property_id, path)
-             //      VALUES (NULL,, '$imgURL') ";
+              
               
           //  $result2 = mysqli_query($connection, $InsertImg);
 
