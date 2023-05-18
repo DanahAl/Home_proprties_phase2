@@ -12,7 +12,7 @@
 
 //$id = $_SESSION['id'];
 
-$id = 2;
+$id =2;
 ?>
 
 
@@ -212,7 +212,7 @@ WHERE rentalapplication.home_seeker_id = '$id'";
              if($_SERVER['REQUEST_METHOD'] == "POST") {
                  
                  $Property_CAT = $_POST['category'];
-                 $sqlQueryCat = " SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id 
+                 $sqlQueryCat = " SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id ,  property.id
                       FROM propertycategory 
                       JOIN property 
                       ON propertycategory.id = property.property_category_id
@@ -223,7 +223,7 @@ WHERE rentalapplication.home_seeker_id = '$id'";
              
              else {
                  
-                 $sql2 = " SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id 
+                 $sql2 = " SELECT propertycategory.id,propertycategory.category, property.name , property.location , property.rooms , property.rent_cost , property.property_category_id , property.id
                       FROM propertycategory 
                       JOIN property 
                       ON propertycategory.id = property.property_category_id " ;

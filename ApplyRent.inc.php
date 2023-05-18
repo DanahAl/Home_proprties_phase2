@@ -1,3 +1,6 @@
+
+
+
 <?php
 
 /*
@@ -11,6 +14,18 @@
  * @author danahiphone
  */
 
+
+// Start the session
+//session_start();
+
+
+//if (!isset($_SESSION['id']))
+//	header('Location:login.php');
+
+
+//$id = $_SESSION['id'];
+
+$id =2;
 
 
         
@@ -36,7 +51,7 @@
         
         
         $Insertquery = "INSERT INTO rentalapplication (id, property_id, home_seeker_id, application_status_id)
-                   VALUES (NULL, '$pID', 2, '$appStatus') ";
+                   VALUES (NULL, '$pID', $id, '$appStatus') ";
                   $result = mysqli_query($connection, $Insertquery);
 
          
