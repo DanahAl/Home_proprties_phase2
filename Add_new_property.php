@@ -100,7 +100,7 @@
           
          */
         
-    if($_SERVER['REQUEST_METHOD'] == "POST") {
+    if(($_SERVER['REQUEST_METHOD'] == "POST") ){
        
               $name = $_POST["name"];       
               $category = $_POST["category"];
@@ -115,8 +115,14 @@
                   $tenants = $_POST["tenants"];
                   $description = $_POST["description"];
                   
+                  if(empty($name)||empty($category)||empty($room)||empty($rent_cost)||empty($location)||empty($tenants)||empty($description)) {
+                      
+                      echo 'Please enter empty fields!';
+                  }
             
-                  
+                  else {
+                     
+                         
                $InsertProperty = "INSERT INTO property (id,homeowner_id, property_category_id, name , rooms ,rent_cost , location , max_tenants,
                  description)
                    VALUES (NULL, 1, '$category', '$name' , '$room' ,'$rent_cost' , '$location' , '$tenants' , '$description')";
@@ -175,6 +181,8 @@
                
              
 
+                  }
+               
       
     }     
               

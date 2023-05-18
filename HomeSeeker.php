@@ -12,7 +12,7 @@
 
 //$id = $_SESSION['id'];
 
-$id = 3;
+$id = 2;
 ?>
 
 
@@ -129,11 +129,20 @@ ON propertycategory.id = property.id
 JOIN applicationstatus
 ON applicationstatus.id = rentalapplication.application_status_id 
 WHERE homeowner_id ='$id' ";
+                 
+              
+                 
+                 $rentalQuery2 ="SELECT * FROM `rentalapplication`
+JOIN property
+ON rentalapplication.property_id = property.id
+JOIN applicationstatus
+ON rentalapplication.application_status_id =applicationstatus.id
+WHERE rentalapplication.home_seeker_id = '$id'";
    
                 
            
 
-            $result1 = mysqli_query($connection, $rentalQuery);
+            $result1 = mysqli_query($connection, $rentalQuery2);
                 
                 
             
