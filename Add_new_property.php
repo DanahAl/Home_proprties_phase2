@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html>    
 <head>
@@ -73,8 +76,7 @@
             </form>
             
             
-            <?php
-            
+            <?php 
          $connection = mysqli_connect("localhost", "root", "root", "properties_home");
         $error = mysqli_connect_error();
         if ($error != null) {
@@ -82,7 +84,7 @@
         }
         
         else{
-            echo "Connect!!!!!!!!!!";
+        //    echo "Connect!!!!!!!!!!";
         }
             
         /*
@@ -114,14 +116,15 @@
                   $description = $_POST["description"];
                   
             
-                  /*
+                  
                $InsertProperty = "INSERT INTO property (id,homeowner_id, property_category_id, name , rooms ,rent_cost , location , max_tenants,
                  description)
                    VALUES (NULL, 1, '$category', '$name' , '$room' ,'$rent_cost' , '$location' , '$tenants' , '$description')";
             
-           echo $InsertProperty;
+          // echo $InsertProperty;
               $result1 = mysqli_query($connection, $InsertProperty);
-              */
+              $last_id_inserted = mysqli_insert_id($connection);
+            //  echo $last_id_inserted;
               
               //to insert image
                   
@@ -159,9 +162,12 @@
                                
      move_uploaded_file($tmpName, 'ImgDB/'.$newImageName);
      $InsertImg = "INSERT INTO propertyimage (id,property_id, path)
-                   VALUES (NULL,2,'$newImageName') ";
+                   VALUES (NULL,'$last_id_inserted','$newImageName') ";
      mysqli_query($connection, $InsertImg);
      echo 'added';
+     
+     header('Location:property_details.php');
+     exit();
                            }
                }
                   }

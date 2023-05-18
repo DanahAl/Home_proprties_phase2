@@ -1,3 +1,20 @@
+
+<?php
+// Start the session
+//session_start();
+?>
+
+<?php
+
+//if (!isset($_SESSION['id']))
+//	header('Location:login.php');
+
+
+//$id = $_SESSION['id'];
+
+?>
+
+
 <!DOCTYPE html>
 
 <html>
@@ -29,17 +46,7 @@
              
              
     
-    <!--
- <script type="text/javascript">
-function thisfunction(){
-    var x = new XMLHttpRequest();
-    x.open("GET","ApplyRent.inc.php",true);
-    x.send();
-    return false;
-}
-</script>
-    
-    -->
+ 
     
     
 </head>
@@ -62,19 +69,33 @@ function thisfunction(){
     <main>
         <button class="b" onclick="home();">Log-Out</button>
 
-       
+         <?php
+                   
+                   $HomeSeekerInfo = "SELECT * FROM homeseeker WHERE id = 1";
+                   
+                   $reslutInfo = mysqli_query($connection , $HomeSeekerInfo) ;
+                   
+                    while ($rows = mysqli_fetch_assoc($reslutInfo)) {
+
+                   ?>
             <div id="owner-info">
-                <h1 id="welcome">&nbsp;Welcome Sarah!</h1>
+                <h1 id="welcome">&nbsp;Welcome <?php echo $rows['first_name']?>!</h1>
                 
                <!-- <h3>&nbsp;Homeowner information</h3>-->
                <div id="infoPre">
+                    
                        <pre >
-                   name:Deemma Ahmad
-                   Phone number:996 545 5552
-                   Email: sarah@gmail.com
+                    Name:<?php echo $rows['first_name']." ".$rows['last_name']?><br>
+                   Phone number:<?php echo $rows['phone_number']?><br>
+                   Email:<?php echo $rows['email_address']?>
                 </pre>
                    
+                
+                   
                </div>
+               
+               <?php
+                    } ?>
              
             </div>
             <!--  <h2 id="Rental-header">Rental Applications</h2> -->
