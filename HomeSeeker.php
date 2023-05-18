@@ -12,6 +12,7 @@
 
 //$id = $_SESSION['id'];
 
+$id = 3;
 ?>
 
 
@@ -71,7 +72,7 @@
 
          <?php
                    
-                   $HomeSeekerInfo = "SELECT * FROM homeseeker WHERE id = 1";
+                   $HomeSeekerInfo = "SELECT * FROM homeseeker WHERE id = '$id' ";
                    
                    $reslutInfo = mysqli_query($connection , $HomeSeekerInfo) ;
                    
@@ -126,7 +127,8 @@ ON rentalapplication.id = property.id
 JOIN propertycategory
 ON propertycategory.id = property.id
 JOIN applicationstatus
-ON applicationstatus.id = rentalapplication.application_status_id ";
+ON applicationstatus.id = rentalapplication.application_status_id 
+WHERE homeowner_id ='$id' ";
    
                 
            
@@ -134,7 +136,6 @@ ON applicationstatus.id = rentalapplication.application_status_id ";
             $result1 = mysqli_query($connection, $rentalQuery);
                 
                 
-           // if (mysqli_num_rows($result1) > 0) {
             
                 ?>
                  
