@@ -31,7 +31,7 @@
 
             <!-- onsubmit="return login()";-->
 
-            <form name="form1" id="formID" action="#" method="POST">
+            <form name="form1" id="formID" action="#" method="POST" enctype="multipart/form-data">
                 <fieldset>
                     <legend><h3>Add new property</h3></legend>
 
@@ -68,7 +68,7 @@
                     <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png"><br />
 
                     <br />
-                    <input class="add" type="submit" value="Add">
+                    <input class="add" type="submit" value="Add" name="submit">
                 </fieldset>
             </form>
             
@@ -125,7 +125,7 @@
               
               //to insert image
                   
-                  if(isset($_POST["submit"])){
+             if(isset($_POST["submit"])){
                       
                       
                 $imgName = $_POST["ImageName"];
@@ -157,7 +157,7 @@
                                $newImageName = uniqid();
                                $newImageName .='.' .$imageExtension;
                                
-     move_uploaded_file($tmpName, 'img/');
+     move_uploaded_file($tmpName, 'ImgDB/'.$newImageName);
      $InsertImg = "INSERT INTO propertyimage (id,property_id, path)
                    VALUES (NULL,2,'$newImageName') ";
      mysqli_query($connection, $InsertImg);
