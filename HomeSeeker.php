@@ -100,7 +100,6 @@ $id = $_SESSION['id'];
                     } ?>
              
             </div>
-            <!--  <h2 id="Rental-header">Rental Applications</h2> -->
             <table>
                 <caption>Requested  Home</caption>
 
@@ -111,7 +110,6 @@ $id = $_SESSION['id'];
                 <th>Status</th>
                 </thead>
 
-                <!--DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';-->
                 
                 
                 
@@ -255,16 +253,7 @@ WHERE rentalapplication.home_seeker_id = '$id'";
                         <td><?php echo $rows['location'];?></td>
 
                         <td>
-                        <!--  <a class="Apply" href="#" onclick="thisfunction()">Apply </a> -->
-                        
-                        <!--
-                        <form action="ApplyRent.inc.php" method="get">
-                            
-                            <input type="submit" name="ApplyButtonName" id="ApplyButtonID" value="Apply">
-                        </form>
-                        
-                        
-                        -->
+                       
                         
                         
                         <a href="ApplyRent.inc.php?propertyID=<?php echo $rows['id'];?>&&HomeSeekerID=<?php echo $id ;?> ">Apply</a>

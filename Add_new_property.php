@@ -87,18 +87,7 @@
         //    echo "Connect!!!!!!!!!!";
         }
             
-        /*
-        $name ="";
-        $category="";
-        $room =0;
-        $rent_cost=0;
-        $location="";
-        $tenants=0;
-        $description="";
-        $imgURL="";
-        $CatID=0;
-          
-         */
+   
         
     if(($_SERVER['REQUEST_METHOD'] == "POST") ){
        
@@ -117,7 +106,8 @@
                   
                   if(empty($name)||empty($category)||empty($room)||empty($rent_cost)||empty($location)||empty($tenants)||empty($description)) {
                       
-                      echo 'Please enter empty fields!';
+                      $msg = '<h4 style="color:red;"><pre>   Please enter all fields!</pre></h4>';
+                        echo $msg;
                   }
             
                   else {
@@ -187,7 +177,6 @@
     }     
               
               
-          //  $result2 = mysqli_query($connection, $InsertImg);
 
             
             mysqli_close($connection);
