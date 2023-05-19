@@ -132,11 +132,14 @@ WHERE homeowner_id ='$id' ";
                  
               
                  
-                 $rentalQuery2 ="SELECT * FROM `rentalapplication`
+                 $rentalQuery2 ="SELECT rentalapplication.id , property.id , property.rent_cost , property.name , propertycategory.id , propertycategory.category , applicationstatus.id , applicationstatus.status
+FROM rentalapplication
 JOIN property
 ON rentalapplication.property_id = property.id
+JOIN propertycategory
+ON property.property_category_id= propertycategory.id
 JOIN applicationstatus
-ON rentalapplication.application_status_id =applicationstatus.id
+ON applicationstatus.id = rentalapplication.application_status_id 
 WHERE rentalapplication.home_seeker_id = '$id'";
    
                 
