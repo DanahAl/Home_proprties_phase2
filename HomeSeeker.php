@@ -1,18 +1,19 @@
 
 <?php
 // Start the session
-//session_start();
+session_start();
 ?>
 
 <?php
 
-//if (!isset($_SESSION['id']))
-//	header('Location:login.php');
+if (!isset($_SESSION['id'])){
+     header('Location:login.php');
+ 
+}
 
+$id = $_SESSION['id'];
 
-//$id = $_SESSION['id'];
-
-$id =2;
+//$id =2;
 ?>
 
 
@@ -119,19 +120,7 @@ $id =2;
                 
                 
                 <?php
-                
-                 $rentalQuery=" SELECT rentalapplication.id , property.id , property.rent_cost , property.name , propertycategory.id , propertycategory.category , applicationstatus.id , applicationstatus.status
-FROM rentalapplication
-JOIN property
-ON rentalapplication.id = property.id
-JOIN propertycategory
-ON propertycategory.id = property.id
-JOIN applicationstatus
-ON applicationstatus.id = rentalapplication.application_status_id 
-WHERE homeowner_id ='$id' ";
-                 
-              
-                 
+         
                  $rentalQuery2 ="SELECT rentalapplication.id , property.id , property.rent_cost , property.name , propertycategory.id , propertycategory.category , applicationstatus.id , applicationstatus.status
 FROM rentalapplication
 JOIN property
@@ -278,7 +267,7 @@ WHERE rentalapplication.home_seeker_id = '$id'";
                         -->
                         
                         
-                        <a href="ApplyRent.inc.php?propertyID=<?php echo $rows['id'];?>">Apply</a>
+                        <a href="ApplyRent.inc.php?propertyID=<?php echo $rows['id'];?>&&HomeSeekerID=<?php echo $id ;?> ">Apply</a>
 
 
                         </td>

@@ -15,19 +15,6 @@
  */
 
 
-// Start the session
-//session_start();
-
-
-//if (!isset($_SESSION['id']))
-//	header('Location:login.php');
-
-
-//$id = $_SESSION['id'];
-
-$id =2;
-
-
         
         $connection = mysqli_connect("localhost", "root", "root", "properties_home");
         $error = mysqli_connect_error();
@@ -45,13 +32,14 @@ $id =2;
                                      
               
                           $pID= $_GET['propertyID'];
+                          $HomeSeekerID = $_GET['HomeSeekerID'];
            //  $pID = $_GET['property_id'];
             //  $HSid = $_GET['home_seeker_id'];
               $appStatus = 2;
         
         
         $Insertquery = "INSERT INTO rentalapplication (id, property_id, home_seeker_id, application_status_id)
-                   VALUES (NULL, '$pID', $id, '$appStatus') ";
+                   VALUES (NULL, '$pID', $HomeSeekerID, '$appStatus') ";
                   $result = mysqli_query($connection, $Insertquery);
 
          
@@ -63,22 +51,3 @@ $id =2;
   
         
         
-        /*
-$id = $_GET['id'];
-$pID = $_GET['property_id'];
-$HSid = $_GET['home_seeker_id'];
-$appStatus = "Under consideration";
-
-
-$Insertquery = "INSERT INTO rentalapplication (id, property_id, home_seeker_id, application_status_id)
-                   VALUES ('$id', '$pID', '$HSid', '$appStatus') ";
-$result = mysqli_query($connection, $Insertquery);
-if ($result) {
-    mysqli_close($connection);
-    header("location: HomeSeeker.php");
-    exit();
-} else {
-    echo "Error deleting record";
-}
-
-*/
