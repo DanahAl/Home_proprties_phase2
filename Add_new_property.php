@@ -162,7 +162,7 @@
      mysqli_query($connection, $InsertImg);
      echo 'added';
      
-     $pid = mysqli_insert_id() ;
+    $pid = mysqli_insert_id($connection) ;
      
      header("Location:property_details.php?id='$pid'");
      exit();

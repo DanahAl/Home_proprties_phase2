@@ -19,7 +19,7 @@
   
   $info = mysqli_fetch_assoc($query);
 
-  $query = mysqli_query($con, "SELECT * FROM homeowner WHERE id = {$info['homeowner_id']}");
+ $query = mysqli_query($con, "SELECT * FROM homeowner WHERE id = {$info['homeowner_id']}");
   $owner = mysqli_fetch_assoc($query);
 
 ?>
