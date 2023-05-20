@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 13, 2023 at 01:14 AM
--- Server version: 5.7.24
--- PHP Version: 8.0.1
+-- Host: 127.0.0.1
+-- Generation Time: May 20, 2023 at 03:52 PM
+-- Server version: 8.0.29
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -21,6 +21,11 @@ SET time_zone = "+00:00";
 -- Database: `properties_home`
 --
 
+
+DROP DATABASE IF EXISTS properties_home;
+CREATE DATABASE properties_home;
+USE properties_home;
+
 -- --------------------------------------------------------
 
 --
@@ -28,17 +33,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `applicationstatus` (
-  `id` int(1) NOT NULL,
+  `id` int NOT NULL,
   `status` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `applicationstatus`
 --
 
 INSERT INTO `applicationstatus` (`id`, `status`) VALUES
-(1, 'Accept'),
-(2, 'under consideration'),
+(1, 'Accepted'),
+(2, 'Declined'),
 (3, 'under consideration');
 
 -- --------------------------------------------------------
@@ -48,12 +53,12 @@ INSERT INTO `applicationstatus` (`id`, `status`) VALUES
 --
 
 CREATE TABLE `homeowner` (
-  `id` int(1) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(30) NOT NULL,
-  `phone_number` int(11) NOT NULL,
+  `phone_number` int NOT NULL,
   `email_address` varchar(70) NOT NULL,
   `password` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `homeowner`
@@ -71,17 +76,17 @@ INSERT INTO `homeowner` (`id`, `name`, `phone_number`, `email_address`, `passwor
 --
 
 CREATE TABLE `homeseeker` (
-  `id` int(1) NOT NULL,
+  `id` int NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(30) NOT NULL,
-  `age` int(11) NOT NULL,
-  `family_members` int(11) NOT NULL,
-  `income` int(11) NOT NULL,
+  `age` int NOT NULL,
+  `family_members` int NOT NULL,
+  `income` int NOT NULL,
   `job` varchar(40) NOT NULL,
-  `phone_number` int(11) NOT NULL,
+  `phone_number` int NOT NULL,
   `email_address` varchar(50) NOT NULL,
   `password` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `homeseeker`
@@ -101,16 +106,16 @@ INSERT INTO `homeseeker` (`id`, `first_name`, `last_name`, `age`, `family_member
 --
 
 CREATE TABLE `property` (
-  `id` int(1) NOT NULL,
-  `homeowner_id` int(11) NOT NULL,
-  `property_category_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `homeowner_id` int NOT NULL,
+  `property_category_id` int NOT NULL,
   `name` varchar(30) NOT NULL,
-  `rooms` int(11) NOT NULL,
-  `rent_cost` int(11) NOT NULL,
+  `rooms` int NOT NULL,
+  `rent_cost` int NOT NULL,
   `location` varchar(40) NOT NULL,
-  `max_tenants` int(11) NOT NULL,
+  `max_tenants` int NOT NULL,
   `description` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `property`
@@ -118,7 +123,7 @@ CREATE TABLE `property` (
 
 INSERT INTO `property` (`id`, `homeowner_id`, `property_category_id`, `name`, `rooms`, `rent_cost`, `location`, `max_tenants`, `description`) VALUES
 (1, 1, 1, 'Home', 5, 30000, 'Riyadh,Al-Naries District', 4, 'modren villa with 5 bedrooms , 4 bathroms , basment , pool , 2 living room , kitchen\r\n\r\n'),
-(2, 2, 2, 'apart5', 3, 10000, 'Riyadh,Al-Olaya District', 2, 'apartment with 3 bedrooms,2 bathroms , 1 living room , kitchen\r\n\r\n'),
+(2, 2, 3, '   apart5   ', 3, 10000, '   Riyadh,Al-Olaya District   ', 2, '   apartment with 3 bedrooms,2 bathroms , 1 living room , kitchen\r\n\r\n   '),
 (3, 3, 3, 'majd', 4, 12000, 'Riyadh,Al-Nafl District', 3, 'apartment with 3 bedrooms , 2 bathroms , 1 living room , kitchen\r\n\r\n');
 
 -- --------------------------------------------------------
@@ -128,9 +133,9 @@ INSERT INTO `property` (`id`, `homeowner_id`, `property_category_id`, `name`, `r
 --
 
 CREATE TABLE `propertycategory` (
-  `id` int(1) NOT NULL,
+  `id` int NOT NULL,
   `category` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `propertycategory`
@@ -148,10 +153,19 @@ INSERT INTO `propertycategory` (`id`, `category`) VALUES
 --
 
 CREATE TABLE `propertyimage` (
-  `id` int(1) NOT NULL,
-  `property_id` int(11) NOT NULL,
-  `path` varchar(80) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int NOT NULL,
+  `property_id` int NOT NULL,
+  `path` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `propertyimage`
+--
+
+INSERT INTO `propertyimage` (`id`, `property_id`, `path`) VALUES
+(1, 1, 'images\\house.jpg'),
+(3, 1, 'images\\house3.jpg'),
+(5, 2, 'images\\house5.jpg');
 
 -- --------------------------------------------------------
 
@@ -160,11 +174,11 @@ CREATE TABLE `propertyimage` (
 --
 
 CREATE TABLE `rentalapplication` (
-  `id` int(1) NOT NULL,
-  `property_id` int(11) NOT NULL,
-  `home_seeker_id` int(11) NOT NULL,
-  `application_status_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int NOT NULL,
+  `property_id` int NOT NULL,
+  `home_seeker_id` int NOT NULL,
+  `application_status_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `rentalapplication`
@@ -173,7 +187,8 @@ CREATE TABLE `rentalapplication` (
 INSERT INTO `rentalapplication` (`id`, `property_id`, `home_seeker_id`, `application_status_id`) VALUES
 (1, 1, 3, 2),
 (2, 2, 2, 1),
-(3, 3, 1, 3);
+(3, 3, 1, 3),
+(4, 1, 1, 3);
 
 --
 -- Indexes for dumped tables
@@ -235,43 +250,43 @@ ALTER TABLE `rentalapplication`
 -- AUTO_INCREMENT for table `applicationstatus`
 --
 ALTER TABLE `applicationstatus`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `homeowner`
 --
 ALTER TABLE `homeowner`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `homeseeker`
 --
 ALTER TABLE `homeseeker`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `propertycategory`
 --
 ALTER TABLE `propertycategory`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `propertyimage`
 --
 ALTER TABLE `propertyimage`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `rentalapplication`
 --
 ALTER TABLE `rentalapplication`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

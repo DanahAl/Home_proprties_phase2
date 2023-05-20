@@ -1,6 +1,6 @@
 <?php  // login page 
 session_start();
-$connection = mysqli_connect("localhost", "root", "root", "home_properties");
+$connection = mysqli_connect("localhost", "root", "root", "properties_home");
 if($_SERVER["REQUEST_METHOD"] == "POST"){  // when the user submit the form 
     $email = $_POST['email']; 
    // $psw = password_hash($_POST['pwd'], PASSWORD_DEFAULT);  // hass the password
