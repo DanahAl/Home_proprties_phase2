@@ -61,34 +61,15 @@
 
 .pic{
   border-radius: 16px;
-  background:#c4c9be;
-  margin-bottom: 2%;
-  width: 320px;
-  height: 170px;
-  background-color: #818977;
-  width: 400px;
-  height: 210px;
-  margin-top:-10%;
-  margin-bottom:17%;
-  
+  background:#c4c9be;  
 }
 
 
-.pic img{
-  width: 90%;
-  height: 100%;
-  padding: 1%;
- margin-left: 5%; 
+.images {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-#images h3{
-  
-  color:#333D29;
-  font-family: Monaco; 
-  font-weight: 900;
-  padding: 15%;
-  margin-top: -90%;
-}
 
 
 legend h4{

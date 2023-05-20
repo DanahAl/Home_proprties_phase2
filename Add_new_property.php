@@ -45,8 +45,8 @@
 
                     <select name="category">
                         <option value="2">Apartment</option>
-                        <option value="3">Villa</option>
-                        <option value="1">Home</option>
+                        <option value="1">Villa</option>
+                        <option value="3">Home</option>
                     </select> <br />
 
                     <label for="numbe rooms">Number of rooms:</label><br>
@@ -162,9 +162,9 @@
      mysqli_query($connection, $InsertImg);
      echo 'added';
      
-    $pid = mysqli_insert_id($connection) ;
+   // $pid = mysqli_insert_id($connection) ;
      
-     header("Location:property_details.php?id='$pid'");
+     header("Location:property_details.php?id='$last_id_inserted'");
      exit();
                            }
                }
