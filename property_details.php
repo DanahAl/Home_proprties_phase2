@@ -2,7 +2,7 @@
 <?php 
   if(!isset($_SESSION)) session_start();
   if(!isset($_SESSION['id'])) {
-    echo "Please <a herf='proj/login.html'>login</a>";
+    echo "Please <a herf='loginS.php'>login</a>";
     exit();
   }
 
@@ -68,6 +68,7 @@
       <div class="propinfo">
         <br>
         <h3>Property Information : </h3>
+
         <p> <?php echo $info['category'] ?> </p>
         <p> <?php echo $info['rooms'] ?>  rooms</p>
         <p>rent  <?php echo $info['rent_cost'] ?>  SAR</p>

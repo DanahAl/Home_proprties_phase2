@@ -119,7 +119,8 @@ $id = $_SESSION['id'];
                 
                 <?php
          
-                 $rentalQuery2 ="SELECT rentalapplication.id , property.id , property.rent_cost , property.name , propertycategory.id , propertycategory.category , applicationstatus.id , applicationstatus.status
+                 $rentalQuery2 ="SELECT rentalapplication.id , property.id , property.rent_cost , property.name , propertycategory.id , propertycategory.category , applicationstatus.id , applicationstatus.status ,
+rentalapplication.property_id
 FROM rentalapplication
 JOIN property
 ON rentalapplication.property_id = property.id
@@ -147,7 +148,7 @@ WHERE rentalapplication.home_seeker_id = '$id'";
                   while ($rows = mysqli_fetch_assoc($result1)) {
 ?>
                     <tr>
-                        <td><a class="property-name" href="property_details.html"> <?php echo $rows['name'];?></a></td>
+                        <td><a class="property-name" href="property_details.php?id= <?php echo $rows['property_id'];?>" ><?php echo $rows['name'];?></a></td>
                         <td>
                             <?php echo $rows['category'];?>
                         </td>
@@ -245,7 +246,7 @@ WHERE rentalapplication.home_seeker_id = '$id'";
                 {
             ?>
                     <tr>
-                        <td><a class="property-name" href="">
+                        <td><a class="property-name" href="property_details.php?id= <?php echo $rows['id'];?>">
                             <?php echo $rows['name'];?></a></td>
                         <td><?php echo $rows['category'];?></td>
                         <td><?php echo $rows['rent_cost'];?></td>
