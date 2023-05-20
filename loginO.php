@@ -14,6 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){  // when the user submit the form
              $id= $row["id"];
              $_SESSION["id"]=$id;
              $_SESSION["user"] = "homeowner";
+		 $_SESSION["login"] = true;
 
        header('location: mm.php'); // go to the log in page 
     
