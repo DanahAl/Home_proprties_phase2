@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){  // when the user submit the form
              $_SESSION["user"] = "homeowner";
 		 $_SESSION["login"] = true;
 
-       header('location: mm.php'); // go to the log in page 
+       header('location: HomeOwner.php'); // go to the log in page 
     
              
          }
